@@ -1,9 +1,9 @@
 import { exibirLivrosNaTela } from "./metodoForEach.js";
 import { aplicarDesconto } from "./metodoMap.js";
 import { filtrarLivros } from "./metodoFilter.js";
+import { ordenarPorPreço } from "./metodoSort.js";
 
 
-let livros = [];
 const urlApiLivros =
   "https://guilhermeonrails.github.io/casadocodigo/livros.json";
 buscaLivrosDaApi();
@@ -11,9 +11,10 @@ buscaLivrosDaApi();
 async function buscaLivrosDaApi() {
   const resposta = await fetch(urlApiLivros);
   const livros = await resposta.json();
-  let livrosComDesconto = aplicarDesconto(livros);
+  const livrosComDesconto = aplicarDesconto(livros);
+  exibirLivrosNaTela(livrosComDesconto)
   filtrarLivros(livrosComDesconto)
-
+  ordenarPorPreço(livrosComDesconto)
 }
 
 
